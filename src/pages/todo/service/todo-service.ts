@@ -13,11 +13,7 @@ const Services = (): ITodoService => {
     return {
         getUserList: async (): Promise<IUser[]> => {
             if (IS_MOCKUP) {
-                try {
-                    return UserListMock
-                } catch (err) {
-                    throw new Error('FCK')
-                }
+                return Promise.resolve(UserListMock)
             }
             try {
                 const {status, data} = await httpClient.get(`/users`);

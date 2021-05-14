@@ -1,49 +1,27 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect} from "react";
 import {List, Avatar, Skeleton, message} from 'antd';
 
 import {IUser} from "../model/todo";
-import TodoService from "../service/todo";
-
-const {getUserList} = TodoService()
-
-interface IStateUserList {
-    users: IUser[]
-    isLoading: boolean
-}
+import {getUserList} from "../service/todo-service";
+import {UseHookService} from "../../../hooks/useService";
 
 const UserList: React.FunctionComponent = (): React.ReactElement => {
-    const [state, setState] = useState<IStateUserList>({
-        users: [] as IUser[],
-        isLoading: true
-    })
+    const {loading, result, err} = UseHookService<IUser[]>(getUserList)
 
     useEffect(() => {
-        (async () => fetchUserList())()
-    }, [])
-
-    const fetchUserList = async () => {
-        try {
-            const response = await getUserList()
-            setState((prevState => {
-                return {
-                    ...prevState,
-                    users: response,
-                    isLoading: false
-                }
-            }))
-        } catch (err) {
-            message.error(`Failed - ${err.message}`)
+        if (err) {
+            message.error('Fetch Failed.').then()
+            return
         }
-    }
+    }, [loading, err])
 
     return (
-        <List
-            loading={state.isLoading}
-            itemLayout="horizontal"
-            dataSource={state.users}
-            renderItem={item => (
-                <List.Item>
-                    <Skeleton avatar title={false} loading={state.isLoading} active>
+        <Skeleton loading={loading} active>
+            <List
+                itemLayout="horizontal"
+                dataSource={result}
+                renderItem={(item: IUser) => (
+                    <List.Item>
                         <List.Item.Meta
                             avatar={
                                 <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
@@ -51,10 +29,10 @@ const UserList: React.FunctionComponent = (): React.ReactElement => {
                             title={<a href="https://ant.design">{item.name}</a>}
                             description={item.address.city}
                         />
-                    </Skeleton>
-                </List.Item>
-            )}
-        />
+                    </List.Item>
+                )}
+            />
+        </Skeleton>
     )
 }
 
