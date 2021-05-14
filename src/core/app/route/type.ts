@@ -6,7 +6,7 @@ export enum ITypeNavLink {
     Hide = "hide"
 }
 
-export interface IPropRoute {
+export interface IPropRouteComponent {
     label: string
     path: string
     type: ITypeNavLink

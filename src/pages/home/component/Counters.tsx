@@ -36,7 +36,7 @@ const Counters: React.FunctionComponent = (): React.ReactElement => {
                     <strong data-testid="var-counter"> {counter}</strong>
                 </Typography.Text>
 
-                <Typography.Text>Reducer:
+                <Typography.Text>Store:
                     <strong data-testid="var-reducer-counter"> {counterReducer}</strong>
                 </Typography.Text>
 

@@ -1,20 +1,22 @@
 import React from "react";
-import {BrowserRouter, Switch, Route} from "react-router-dom";
-import {useSelector, RootStateOrAny} from "react-redux";
-import {Layout} from 'antd';
+import {
+    HomeOutlined,
+    MenuFoldOutlined,
+    UserOutlined,
+    ContainerOutlined,
+    BarChartOutlined,
+} from '@ant-design/icons';
+import {AuthenticatePage, HomePage, TodoPage} from "pages";
 
-import {Sidebar, Breadcrumb, Footer as MyFooter} from "component/Layout"
-import {Routes} from "./routes";
-import {IPropRoute, ITypeNavLink} from "./type";
-
-const {Sider, Content, Footer} = Layout;
+import {IPropRouteComponent, ITypeNavLink} from "./type";
+import PrivateRoute from "./private";
 
 export const AppRoute = () => {
-    let All = [] as IPropRoute[]
-    let _NavLink = [] as IPropRoute[]
-    let _Dropdown = [] as IPropRoute[]
+    let All = [] as IPropRouteComponent[]
+    let _NavLink = [] as IPropRouteComponent[]
+    let _Dropdown = [] as IPropRouteComponent[]
 
-    Routes.forEach(route => {
+    RouteComponents.forEach(route => {
         if (route.type === ITypeNavLink.NavLink) {
             _NavLink.push(route)
         } else if (route.type === ITypeNavLink.Dropdown) {
@@ -29,47 +31,37 @@ export const AppRoute = () => {
     }
 }
 
-const _renderAppRoute = () => {
-    return (
-        AppRoute().All.map((route) => {
-            return (
-                <Route key={route.path} path={route.path} exact>
-                    {route.Component}
-                </Route>
-            )
-        })
-    )
-}
-
-const AppContainer: React.FunctionComponent = (): React.ReactElement => {
-    const {isLoading} = useSelector((state: RootStateOrAny) => state.app);
-    return (
-        <BrowserRouter>
-
-            <Layout style={{
-                minHeight: "100vh",
-                cursor: isLoading ? "not-allowed" : "auto",
-                pointerEvents: isLoading ? "none" : "auto"
-            }}>
-                <Sider collapsible>
-                    <Sidebar/>
-                </Sider>
-
-                <Layout>
-
-                    <Breadcrumb/>
-                    <Content style={{margin: "0 16px"}}>
-                        <div style={{padding: "24px", minHeight: 360}}>
-                            <Switch>{_renderAppRoute()}</Switch>
-                        </div>
-                    </Content>
-
-                    <Footer><MyFooter/></Footer>
-                </Layout>
-
-            </Layout>
-        </BrowserRouter>
-    );
-};
-
-export default AppContainer;
+export const RouteComponents: IPropRouteComponent[] = [
+    {
+        label: "Home",
+        path: "/", type: ITypeNavLink.NavLink,
+        icon: <HomeOutlined/>,
+        Component: <HomePage/>
+    },
+    {
+        label: "Home",
+        path: "/privilege", type: ITypeNavLink.Hide,
+        icon: <MenuFoldOutlined/>,
+        Component: <AuthenticatePage/>
+    },
+    {
+        label: "Todo",
+        path: "/todo",
+        icon: <ContainerOutlined/>,
+        type: ITypeNavLink.NavLink,
+        Component: <PrivateRoute><TodoPage/></PrivateRoute>
+    },
+    {
+        label: "About", path: "/about",
+        type: ITypeNavLink.Dropdown,
+        icon: <UserOutlined/>,
+        Component: <></>
+    },
+    {
+        label: "Jobs",
+        path: "/jobs",
+        type: ITypeNavLink.Dropdown,
+        icon: <BarChartOutlined/>,
+        Component: <></>
+    },
+]

@@ -18,6 +18,10 @@ const FormLogin: React.FunctionComponent = (): React.ReactElement => {
     const onFinish = async (values: IFromLogin) => {
         try {
             const response = await signInWithUserNameAndPassword(values)
+            if (!response) {
+                message.error(`Something went wrong.`)
+                return
+            }
             dispatch(setAuthenticate(response))
             push("/")
             message.success(`Login Success.`)
@@ -29,7 +33,6 @@ const FormLogin: React.FunctionComponent = (): React.ReactElement => {
 
     return (
         <Form
-            name="basic"
             initialValues={AuthenticateInputMock}
             onFinish={onFinish}
         >

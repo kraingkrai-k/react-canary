@@ -1,7 +1,7 @@
 import React from "react";
 import {Provider} from "react-redux";
 
-import AppContainer from "core/app/route";
+import AppContainer from "core/app/AppContainer";
 import store from "store";
 
 const App: React.FunctionComponent = (): React.ReactElement => {

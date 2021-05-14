@@ -40,12 +40,10 @@ const NavLink: React.FunctionComponent = (): React.ReactElement => {
     const {authenticate} = useSelector(
         (state: RootStoreType) => state.app
     );
-    const {push} = useHistory()
-
+    const {push, location} = useHistory()
 
     const handleSubmitLogOut = async () => {
         try {
-            // const response = await signInWithUserNameAndPassword(AuthenticateInputMock)
             dispatch(setUnAuthorization())
             push("/")
             message.success(`Bye - ${authenticate.data.firstName}`)
@@ -55,9 +53,13 @@ const NavLink: React.FunctionComponent = (): React.ReactElement => {
     };
 
     return (
-
-        <Menu theme="dark" defaultSelectedKeys={["/"]} defaultOpenKeys={["/"]} triggerSubMenuAction="click"
-              mode="inline">
+        <Menu
+            defaultSelectedKeys={[location.pathname]}
+            defaultOpenKeys={[location.pathname]}
+            triggerSubMenuAction="click"
+            mode="inline"
+            style={{height : '100%'}}
+        >
             <Menu.Item style={{textAlign: "center", margin: "12px 0 12px 0"}} onClick={() => push("/")}>
                 <Image
                     preview={false}
@@ -65,7 +67,6 @@ const NavLink: React.FunctionComponent = (): React.ReactElement => {
                     src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
                 />
             </Menu.Item>
-
             {_renderNavLink()}
 
             <SubMenu key="sub1" icon={<MoreOutlined/>} title="More">
@@ -76,7 +77,7 @@ const NavLink: React.FunctionComponent = (): React.ReactElement => {
                 authenticate.token &&
                 <Menu.Item key="logout" icon={<LogoutOutlined/>} onClick={handleSubmitLogOut}>
                     <Typography.Text style={{color: "#FFFFFF"}}>
-                        {"Logout"}
+                        Logout
                     </Typography.Text>
                 </Menu.Item>
             }

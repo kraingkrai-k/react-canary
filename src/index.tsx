@@ -1,4 +1,5 @@
-import './App.less';
+import 'core/theme/light.less'
+import 'core/theme/dark.less'
 
 import React from "react";
 import ReactDOM from "react-dom";
