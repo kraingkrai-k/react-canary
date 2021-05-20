@@ -1,5 +1,6 @@
 import React from "react";
-import {ErrorMsg} from "../common/ToastMessage";
+
+import ErrorGeneral from './500'
 
 class ErrorBoundary extends React.Component {
     constructor(props: {}) {
@@ -17,15 +18,13 @@ class ErrorBoundary extends React.Component {
         // You can also log the error to an error reporting service
         // logErrorToMyService(error, errorInfo);
         console.log('error', error)
-        ErrorMsg('componentDidCatch').then()
         console.log('errorInfo', errorInfo)
     }
 
     render() {
         // @ts-ignore
         if (this.state.hasError) {
-            // You can render any custom fallback UI
-            return <h1>Something went wrong.</h1>;
+            return <ErrorGeneral/>
         }
 
         return this.props.children;

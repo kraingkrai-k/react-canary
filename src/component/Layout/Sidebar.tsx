@@ -1,39 +1,17 @@
 import React from "react";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {Menu, Image, Typography, message} from 'antd';
-import {MoreOutlined, LogoutOutlined} from "@ant-design/icons";
+import {Menu, Image, Typography, Modal} from 'antd';
+import {MoreOutlined, LogoutOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
 
-import {AppRoute} from "core/app/route";
 import {RootStoreType, setUnAuthorization} from "store/app";
+import {RenderMenu, RenderSubMenuMore} from "core/app/route";
+import {ACCESS_TOKEN} from "core/utils/storage";
+
+import {ErrorMsg, SuccessMsg} from "../common/ToastMessage";
 
 const {SubMenu} = Menu;
-
-const _renderNavLink = () => {
-    return (
-        AppRoute().NavLink.map((route) => (
-                <Menu.Item key={route.path} icon={route.icon}>
-                    <Link to={route.path}>
-                        {route.label}
-                    </Link>
-                </Menu.Item>
-            )
-        )
-    )
-};
-
-const _renderDropDown = () => {
-    return (
-        AppRoute().Dropdown.map((route) => (
-                <Menu.Item key={route.path} icon={route.icon}>
-                    <Link to={route.path}>
-                        {route.label}
-                    </Link>
-                </Menu.Item>
-            )
-        )
-    );
-};
+const {confirm} = Modal
 
 const NavLink: React.FunctionComponent = (): React.ReactElement => {
     const dispatch = useDispatch();
@@ -42,15 +20,27 @@ const NavLink: React.FunctionComponent = (): React.ReactElement => {
     );
     const {push, location} = useHistory()
 
-    const handleSubmitLogOut = async () => {
+    const handlerSubmitLogOut = async () => {
         try {
+            window.sessionStorage.removeItem(ACCESS_TOKEN)
             dispatch(setUnAuthorization())
             push("/")
-            message.success(`Bye - ${authenticate.data.firstName}`)
+            SuccessMsg(`Bye - ${authenticate.data.firstName}`)
         } catch (err) {
-            console.error('ERR - ', err)
+            ErrorMsg()
+            console.warn('ERR - ', err)
         }
     };
+
+    const onConfirmLogOut = () => {
+        confirm({
+            title: 'Do you want logout?',
+            icon: <ExclamationCircleOutlined/>,
+            onOk() {
+                return handlerSubmitLogOut()
+            },
+        });
+    }
 
     return (
         <Menu
@@ -58,7 +48,7 @@ const NavLink: React.FunctionComponent = (): React.ReactElement => {
             defaultOpenKeys={[location.pathname]}
             triggerSubMenuAction="click"
             mode="inline"
-            style={{height : '100%'}}
+            style={{height: '100%'}}
         >
             <Menu.Item style={{textAlign: "center", margin: "12px 0 12px 0"}} onClick={() => push("/")}>
                 <Image
@@ -67,16 +57,16 @@ const NavLink: React.FunctionComponent = (): React.ReactElement => {
                     src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
                 />
             </Menu.Item>
-            {_renderNavLink()}
+            {RenderMenu}
 
-            <SubMenu key="sub1" icon={<MoreOutlined/>} title="More">
-                {_renderDropDown()}
+            <SubMenu key="more" icon={<MoreOutlined/>} title="More">
+                {RenderSubMenuMore}
             </SubMenu>
 
             {
                 authenticate.token &&
-                <Menu.Item key="logout" icon={<LogoutOutlined/>} onClick={handleSubmitLogOut}>
-                    <Typography.Text style={{color: "#FFFFFF"}}>
+                <Menu.Item key="logout" icon={<LogoutOutlined/>} onClick={onConfirmLogOut}>
+                    <Typography.Text>
                         Logout
                     </Typography.Text>
                 </Menu.Item>

@@ -14,8 +14,9 @@ interface InterfaceState {
 
 const UserList: React.FunctionComponent = (): React.ReactElement => {
     const {service} = useAxios<ITodoService>((axiosInstance) => TodoService(axiosInstance))
-    const {getUserList} = service()
     const [state, setState] = useState<InterfaceState>({loading: true, userList: []})
+
+    const {getUserList} = service()
 
     const fetchUserList = useCallback(async () => {
         const {result, err} = await UseService(getUserList)

@@ -20,7 +20,7 @@ const Services = (axiosInstance: AxiosInstance): ITodoService => {
                 if (status !== 200) {
                     return []
                 }
-                return data as IUser[]
+                return data
             } catch (err) {
                 return err
             }

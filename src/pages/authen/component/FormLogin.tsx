@@ -4,30 +4,34 @@ import {useHistory} from "react-router-dom";
 import {Form, Input, Button} from 'antd';
 
 import {setAuthenticate} from "store/app";
+import useAxios, {UseService} from "hooks/useAxios";
+import {ErrorMsg, SuccessMsg} from "component/common/ToastMessage";
+import {ACCESS_TOKEN} from "core/utils/storage";
 
 import {IFromLoginField, IFromLogin} from "../model/formLogin";
-import {AuthenticateInputMock} from "../mock/authen";
-import AuthService from "../service/authen";
-import {ErrorMsg, SuccessMsg} from "../../../component/common/ToastMessage";
-
-const {signInWithUserNameAndPassword} = AuthService()
+import {AuthenticateInputMock, AuthenticateOutputMock} from "../mock/authen";
+import AuthService, {IServiceAuth} from "../service/authen-service";
 
 const FormLogin: React.FunctionComponent = (): React.ReactElement => {
+    const {service} = useAxios<IServiceAuth>((axiosInstance) => AuthService(axiosInstance))
+
     const dispatch = useDispatch();
     const {push} = useHistory()
 
+    const {signInWithUserNameAndPassword} = service()
+
     const onFinish = async (values: IFromLogin) => {
         try {
-            const response = await signInWithUserNameAndPassword(values)
-            if (!response) {
+            const {result, err} = await UseService(() => signInWithUserNameAndPassword(values))
+            if (err) {
                 ErrorMsg()
                 return
             }
-            dispatch(setAuthenticate(response))
+            window.sessionStorage.setItem(ACCESS_TOKEN, AuthenticateOutputMock.token)
+            dispatch(setAuthenticate(result))
             push("/")
             SuccessMsg('Login Success.')
         } catch (err) {
-            console.error('ERR - ', err)
             ErrorMsg()
         }
     };

@@ -1,8 +1,9 @@
 import React from "react";
-import {Route, Redirect} from "react-router-dom";
-import {IPropPrivateRoute} from "./type";
 import {useSelector} from "react-redux";
-import {RootStoreType} from "../../../store/app";
+import {Route, Redirect} from "react-router-dom";
+
+import {RootStoreType} from "store/app";
+import {IPropPrivateRoute} from "./type";
 
 const PrivateRoute = ({children, ...props}: IPropPrivateRoute): React.ReactElement => {
     const {authenticate} = useSelector(
