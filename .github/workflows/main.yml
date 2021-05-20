@@ -8,6 +8,10 @@ on:
     branches:
       - main
 
+env:
+  REACT_APP_BASE_URL_REST: ${{ secrets.REACT_APP_BASE_URL_REST }}
+  REACT_APP_IS_MOCKUP: ${{ secrets.REACT_APP_IS_MOCKUP }}
+
 jobs:
   build:
     name: Build

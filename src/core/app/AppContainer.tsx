@@ -12,7 +12,6 @@ import ErrorBoundary from "../../component/Exceptions/ErrorBoundary";
 import Loading from "../../component/common/LoadingComp";
 import {ErrorMsg} from "../../component/common/ToastMessage";
 
-
 const AppContainer: React.FunctionComponent = (): React.ReactElement => {
     const dispatch = useDispatch()
     const [ready, setReady] = useState<boolean>(false)
