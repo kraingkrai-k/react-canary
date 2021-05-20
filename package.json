@@ -6,6 +6,7 @@
     "name": "Kraingkrai-K",
     "github": "https://github.com/kraingkrai-k"
   },
+  "homepage": "https://kraingkrai-k.github.io/react-canary/",
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@reduxjs/toolkit": "^1.5.0",
