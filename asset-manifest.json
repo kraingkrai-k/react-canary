@@ -3,10 +3,10 @@
     "static/js/0.7359676a.chunk.js": "/react-canary/static/js/0.7359676a.chunk.js",
     "static/js/0.7359676a.chunk.js.map": "/react-canary/static/js/0.7359676a.chunk.js.map",
     "main.css": "/react-canary/static/css/main.8bd1b1b7.chunk.css",
-    "main.js": "/react-canary/static/js/main.6a43fd9e.chunk.js",
-    "main.js.map": "/react-canary/static/js/main.6a43fd9e.chunk.js.map",
-    "runtime-main.js": "/react-canary/static/js/runtime-main.790bf67c.js",
-    "runtime-main.js.map": "/react-canary/static/js/runtime-main.790bf67c.js.map",
+    "main.js": "/react-canary/static/js/main.0a9ea885.chunk.js",
+    "main.js.map": "/react-canary/static/js/main.0a9ea885.chunk.js.map",
+    "runtime-main.js": "/react-canary/static/js/runtime-main.bd8d23ff.js",
+    "runtime-main.js.map": "/react-canary/static/js/runtime-main.bd8d23ff.js.map",
     "static/js/3.d2f22ec3.chunk.js": "/react-canary/static/js/3.d2f22ec3.chunk.js",
     "static/js/3.d2f22ec3.chunk.js.map": "/react-canary/static/js/3.d2f22ec3.chunk.js.map",
     "static/js/4.5389214e.chunk.js": "/react-canary/static/js/4.5389214e.chunk.js",
@@ -17,8 +17,8 @@
     "static/js/6.d595cd9d.chunk.js.map": "/react-canary/static/js/6.d595cd9d.chunk.js.map",
     "static/js/7.491d795f.chunk.js": "/react-canary/static/js/7.491d795f.chunk.js",
     "static/js/7.491d795f.chunk.js.map": "/react-canary/static/js/7.491d795f.chunk.js.map",
-    "static/js/8.afd557db.chunk.js": "/react-canary/static/js/8.afd557db.chunk.js",
-    "static/js/8.afd557db.chunk.js.map": "/react-canary/static/js/8.afd557db.chunk.js.map",
+    "static/js/8.ad14e3d6.chunk.js": "/react-canary/static/js/8.ad14e3d6.chunk.js",
+    "static/js/8.ad14e3d6.chunk.js.map": "/react-canary/static/js/8.ad14e3d6.chunk.js.map",
     "static/js/9.d924bca7.chunk.js": "/react-canary/static/js/9.d924bca7.chunk.js",
     "static/js/9.d924bca7.chunk.js.map": "/react-canary/static/js/9.d924bca7.chunk.js.map",
     "index.html": "/react-canary/index.html",
@@ -26,9 +26,9 @@
     "static/js/3.d2f22ec3.chunk.js.LICENSE.txt": "/react-canary/static/js/3.d2f22ec3.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.790bf67c.js",
+    "static/js/runtime-main.bd8d23ff.js",
     "static/js/3.d2f22ec3.chunk.js",
     "static/css/main.8bd1b1b7.chunk.css",
-    "static/js/main.6a43fd9e.chunk.js"
+    "static/js/main.0a9ea885.chunk.js"
   ]
 }
