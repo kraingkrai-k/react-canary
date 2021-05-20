@@ -50,7 +50,7 @@ const NavLink: React.FunctionComponent = (): React.ReactElement => {
             mode="inline"
             style={{height: '100%'}}
         >
-            <Menu.Item style={{textAlign: "center", margin: "12px 0 12px 0"}} onClick={() => push("/")}>
+            <Menu.Item disabled style={{textAlign: "center", margin: "12px 0 12px 0"}}>
                 <Image
                     preview={false}
                     width={30}

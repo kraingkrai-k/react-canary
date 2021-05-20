@@ -9,7 +9,7 @@ const Home: React.FunctionComponent = (): React.ReactElement => {
         <>
             <Row>
                 <Col span={24}>
-                    <Typography.Title>สวัสดีชาวโลก</Typography.Title>
+                    <Typography.Title level={2}>สวัสดีชาวโลก</Typography.Title>
                 </Col>
             </Row>
             <Divider/>
