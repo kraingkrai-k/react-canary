@@ -8,7 +8,7 @@ import Loading from "../../component/common/LoadingComp";
 const AppContainer: React.FunctionComponent = (): React.ReactElement => {
     return (
         <ErrorBoundary>
-            <BrowserRouter>
+            <BrowserRouter basename={process.env.PUBLIC_URL}>
                 <Suspense fallback={<Loading/>}>
                     <LayoutComponent/>
                 </Suspense>
