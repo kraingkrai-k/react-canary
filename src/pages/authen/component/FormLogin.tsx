@@ -1,13 +1,14 @@
 import React from "react";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {Form, Input, Button, message} from 'antd';
+import {Form, Input, Button} from 'antd';
 
 import {setAuthenticate} from "store/app";
 
 import {IFromLoginField, IFromLogin} from "../model/formLogin";
 import {AuthenticateInputMock} from "../mock/authen";
 import AuthService from "../service/authen";
+import {ErrorMsg, SuccessMsg} from "../../../component/common/ToastMessage";
 
 const {signInWithUserNameAndPassword} = AuthService()
 
@@ -19,15 +20,15 @@ const FormLogin: React.FunctionComponent = (): React.ReactElement => {
         try {
             const response = await signInWithUserNameAndPassword(values)
             if (!response) {
-                message.error(`Something went wrong.`)
+                ErrorMsg()
                 return
             }
             dispatch(setAuthenticate(response))
             push("/")
-            message.success(`Login Success.`)
+            SuccessMsg('Login Success.')
         } catch (err) {
             console.error('ERR - ', err)
-            message.error(`Login Failed.`)
+            ErrorMsg()
         }
     };
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {lazy} from "react";
 import {
     HomeOutlined,
     MenuFoldOutlined,
@@ -6,10 +6,13 @@ import {
     ContainerOutlined,
     BarChartOutlined,
 } from '@ant-design/icons';
-import {AuthenticatePage, HomePage, TodoPage} from "pages";
 
 import {IPropRouteComponent, ITypeNavLink} from "./type";
 import PrivateRoute from "./private";
+
+const AuthenticatePage = lazy(() => import('pages/authen/'));
+const HomePage = lazy(() => import('pages/home/'));
+const TodoPage = lazy(() => import('pages/todo/'));
 
 export const AppRoute = () => {
     let All = [] as IPropRouteComponent[]
@@ -34,13 +37,15 @@ export const AppRoute = () => {
 export const RouteComponents: IPropRouteComponent[] = [
     {
         label: "Home",
-        path: "/", type: ITypeNavLink.NavLink,
+        path: "/",
+        type: ITypeNavLink.NavLink,
         icon: <HomeOutlined/>,
         Component: <HomePage/>
     },
     {
         label: "Home",
-        path: "/privilege", type: ITypeNavLink.Hide,
+        path: "/privilege",
+        type: ITypeNavLink.Hide,
         icon: <MenuFoldOutlined/>,
         Component: <AuthenticatePage/>
     },

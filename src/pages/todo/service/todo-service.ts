@@ -1,28 +1,28 @@
-import {httpClient} from "core/utils/axios";
+import {AxiosInstance} from "axios"
 
 import {IS_MOCKUP} from "core/utils/env";
 import {UserListMock} from "../mock/userList";
 import {IGetTodoFilter, ITodo, IUser} from "../model/todo";
 
-interface ITodoService {
+export interface ITodoService {
     getTodoByID: (filter: IGetTodoFilter) => Promise<ITodo>
     getUserList: () => Promise<IUser[]>
 }
 
-const Services = (): ITodoService => {
+const Services = (axiosInstance: AxiosInstance): ITodoService => {
     return {
         getUserList: async (): Promise<IUser[]> => {
             if (IS_MOCKUP) {
                 return Promise.resolve(UserListMock)
             }
             try {
-                const {status, data} = await httpClient.get(`/users`);
+                const {status, data} = await axiosInstance.get(`/users`);
                 if (status !== 200) {
-                    return {} as IUser[]
+                    return []
                 }
-                return data
+                return data as IUser[]
             } catch (err) {
-                throw new Error(err)
+                return err
             }
         },
         getTodoByID: async (filter: IGetTodoFilter): Promise<ITodo> => {
@@ -30,7 +30,7 @@ const Services = (): ITodoService => {
                 return {} as ITodo
             }
             try {
-                const {status, data} = await httpClient.get(`/todos/${filter.id}`);
+                const {status, data} = await axiosInstance.get(`/todos/${filter.id}`);
                 if (status !== 200) {
                     return {} as ITodo
                 }
@@ -42,4 +42,4 @@ const Services = (): ITodoService => {
     }
 }
 
-export const {getUserList, getTodoByID} = Services()
+export default Services

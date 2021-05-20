@@ -1,25 +1,43 @@
-import React, {useEffect} from "react";
-import {List, Avatar, Skeleton, message} from 'antd';
+import React, {useCallback, useEffect, useState} from "react";
+import {List, Avatar, Skeleton} from 'antd';
+
+import useAxios, {UseService} from "hooks/useAxios";
+import {ErrorMsg} from "component/common/ToastMessage";
 
 import {IUser} from "../model/todo";
-import {getUserList} from "../service/todo-service";
-import {UseHookService} from "../../../hooks/useService";
+import TodoService, {ITodoService} from "../service/todo-service";
+
+interface InterfaceState {
+    loading: boolean,
+    userList: IUser[]
+}
 
 const UserList: React.FunctionComponent = (): React.ReactElement => {
-    const {loading, result, err} = UseHookService<IUser[]>(getUserList)
+    const {service} = useAxios<ITodoService>((axiosInstance) => TodoService(axiosInstance))
+    const {getUserList} = service()
+    const [state, setState] = useState<InterfaceState>({loading: true, userList: []})
 
-    useEffect(() => {
+    const fetchUserList = useCallback(async () => {
+        const {result, err} = await UseService(getUserList)
         if (err) {
-            message.error('Fetch Failed.').then()
+            ErrorMsg()
+            setState(prevState => ({...prevState, loading: false}))
             return
         }
-    }, [loading, err])
+        setState(prevState => ({...prevState, userList: result, loading: false}))
+        // eslint-disable-next-line
+    }, [])
+
+    useEffect(() => {
+        fetchUserList().catch(() => null)
+        // eslint-disable-next-line
+    }, [])
 
     return (
-        <Skeleton loading={loading} active>
+        <Skeleton loading={state.loading} active>
             <List
                 itemLayout="horizontal"
-                dataSource={result}
+                dataSource={state.userList}
                 renderItem={(item: IUser) => (
                     <List.Item>
                         <List.Item.Meta
