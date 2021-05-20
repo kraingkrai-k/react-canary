@@ -2,7 +2,9 @@
 
 React-Canary is my todo.
 
-CRA & Customize Theme antd with craco
+CRA & customize switch theme with craco
+
+### [Demo](https://kraingkrai-k.github.io/react-canary/)
 
 ## Available Scripts
 
