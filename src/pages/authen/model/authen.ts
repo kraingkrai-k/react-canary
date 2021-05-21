@@ -1,6 +1,6 @@
 export interface AuthenticateInput {
-    userName: string
-    passWord: string
+    username: string
+    password: string
 }
 
 export interface AuthenticateOutput {

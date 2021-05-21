@@ -1,9 +1,9 @@
 export interface IFromLogin {
-    userName: string
-    passWord: string
+    username: string
+    password: string
 }
 
 export const IFromLoginField: IFromLogin = {
-    userName: "userName",
-    passWord: "passWord"
+    username: "username",
+    password: "password"
 }

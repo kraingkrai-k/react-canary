@@ -1,8 +1,8 @@
 import {AuthenticateInput, AuthenticateOutput} from "../model/authen";
 
 export const AuthenticateInputMock: AuthenticateInput = {
-    userName: "KK",
-    passWord: "password"
+    username: "KK",
+    password: "password"
 }
 
 export const AuthenticateOutputMock: AuthenticateOutput = {

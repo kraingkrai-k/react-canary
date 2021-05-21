@@ -1,7 +1,7 @@
-import React from "react";
+import React, {forwardRef, useImperativeHandle} from "react";
 import {useDispatch} from "react-redux";
 import {useHistory} from "react-router-dom";
-import {Form, Input, Button} from 'antd';
+import {Form, FormInstance, Input} from 'antd';
 
 import {setAuthenticate} from "store/app";
 import useAxios, {UseService} from "hooks/useAxios";
@@ -12,8 +12,13 @@ import {IFromLoginField, IFromLogin} from "../model/formLogin";
 import {AuthenticateInputMock, AuthenticateOutputMock} from "../mock/authen";
 import AuthService, {IServiceAuth} from "../service/authen-service";
 
-const FormLogin: React.FunctionComponent = (): React.ReactElement => {
+interface IProps {
+    children?: React.ReactNode
+}
+
+const FormLogin = forwardRef<FormInstance, IProps>((props, ref) => {
     const {service} = useAxios<IServiceAuth>((axiosInstance) => AuthService(axiosInstance))
+    const [form] = Form.useForm()
 
     const dispatch = useDispatch();
     const {push} = useHistory()
@@ -36,34 +41,39 @@ const FormLogin: React.FunctionComponent = (): React.ReactElement => {
         }
     };
 
+    // @ts-ignore
+    useImperativeHandle(ref, () => ({
+        submit: () => {
+            form.submit()
+        },
+    }), [form])
+
     return (
         <Form
+            ref={ref}
+            form={form}
             initialValues={AuthenticateInputMock}
             onFinish={onFinish}
+            wrapperCol={{span: 24, offset: 1}}
+            labelCol={{span: 4}}
         >
             <Form.Item
                 label="Username"
-                name={IFromLoginField.userName}
+                name={IFromLoginField.username}
                 rules={[{required: true, message: 'Please input your username!'}]}
             >
-                <Input/>
+                <Input maxLength={12}/>
             </Form.Item>
 
             <Form.Item
                 label="Password"
-                name={IFromLoginField.passWord}
+                name={IFromLoginField.password}
                 rules={[{required: true, message: 'Please input your password!'}]}
             >
-                <Input.Password/>
-            </Form.Item>
-
-            <Form.Item style={{textAlign: "center"}}>
-                <Button type="primary" htmlType="submit">
-                    Submit
-                </Button>
+                <Input.Password maxLength={12}/>
             </Form.Item>
         </Form>
     );
-};
+});
 
 export default FormLogin

@@ -1,19 +1,15 @@
 import React from "react";
-import {Row, Col, Card} from 'antd';
+import {Row, Col} from 'antd';
 
-import FormLogin from "./component/FormLogin";
+import ModalLogin from "./component/ModalLogin";
 
 const AuthenticatePages: React.FunctionComponent = (): React.ReactElement => {
     return (
-        <>
-            <Row>
-                <Col span={24}>
-                    <Card>
-                        <FormLogin/>
-                    </Card>
-                </Col>
-            </Row>
-        </>
+        <Row>
+            <Col span={24}>
+                <ModalLogin/>
+            </Col>
+        </Row>
     );
 };
 
