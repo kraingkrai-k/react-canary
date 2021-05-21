@@ -11,6 +11,7 @@ import {
 
 import {IPropRouteComponent, ITypeNavLink, IRole} from "./type";
 import PrivateRoute from "./private";
+import ErrorNotFound from "../../../component/Exceptions/404";
 
 const AuthenticatePage = lazy(() => import('pages/authen/'));
 const HomePage = lazy(() => import('pages/home/'));
@@ -56,6 +57,14 @@ const RouteComponents: IPropRouteComponent[] = [
         icon: <BarChartOutlined/>,
         role: [IRole.Developer],
         Component: <></>
+    },
+    {
+        label: "",
+        path: "*",
+        type: ITypeNavLink.Hide,
+        icon: <></>,
+        role: [IRole.Developer],
+        Component: <ErrorNotFound/>
     },
 ]
 

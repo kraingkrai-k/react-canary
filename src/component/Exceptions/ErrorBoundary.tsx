@@ -1,28 +1,32 @@
-import React from "react";
+import React, {ErrorInfo} from "react";
 
 import ErrorGeneral from './500'
 
-class ErrorBoundary extends React.Component {
-    constructor(props: {}) {
-        super(props);
-        this.state = {hasError: false};
+interface Props {
+    children: React.ReactNode;
+}
+
+interface State {
+    hasError: boolean;
+}
+
+class ErrorBoundary extends React.Component<Props, State> {
+    public state: State = {
+        hasError: false
     }
 
-    static getDerivedStateFromError(error: Error) {
-        console.log('getDerivedStateFromError:', error)
+    public static getDerivedStateFromError(_: Error): State {
         // Update state so the next render will show the fallback UI.
         return {hasError: true};
     }
 
-    componentDidCatch(error: Error, errorInfo: any) {
+    public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
         // You can also log the error to an error reporting service
         // logErrorToMyService(error, errorInfo);
-        console.log('error', error)
-        console.log('errorInfo', errorInfo)
+        console.error("Uncaught error:", error, errorInfo);
     }
 
-    render() {
-        // @ts-ignore
+    public render() {
         if (this.state.hasError) {
             return <ErrorGeneral/>
         }
