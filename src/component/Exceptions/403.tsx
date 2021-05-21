@@ -1,15 +1,17 @@
-import {Result, Button} from 'antd';
-import {useHistory} from "react-router-dom";
+import {Result} from 'antd';
+import ModalLogin from "../../pages/authen/component/ModalLogin";
+import React from "react";
 
-const ErrorUnAuthorized = () => {
-    const {push} = useHistory()
+const ErrorUnAuthorized: React.FunctionComponent = (): React.ReactElement => {
     return (
-        <Result
-            status="403"
-            title="403"
-            subTitle="Sorry, you are not authorized to access this page."
-            extra={<Button type="primary" onClick={() => push('/')}>Back Home</Button>}
-        />
+        <>
+            <ModalLogin/>
+            <Result
+                status="403"
+                title="403"
+                subTitle="Sorry, you are not authorized to access this page."
+            />
+        </>
     )
 }
 

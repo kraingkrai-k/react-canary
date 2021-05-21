@@ -1,7 +1,8 @@
 import {Result, Button} from 'antd';
 import {useHistory} from "react-router-dom";
+import React from "react";
 
-const ErrorNotFound = () => {
+const ErrorNotFound: React.FunctionComponent = (): React.ReactElement => {
     const {push} = useHistory()
     return (
         <Result
