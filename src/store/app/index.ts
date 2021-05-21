@@ -12,10 +12,10 @@ export interface IPropsState {
 const initialState: IPropsState = {
     isLoading: false,
     authenticate: {
-        token: "",
-        data: {
-            firstName: "",
-            lastName: ""
+        accessToken: "",
+        user: {
+            id: 0,
+            email: "",
         }
     }
 };

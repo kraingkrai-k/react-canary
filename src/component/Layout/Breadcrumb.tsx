@@ -14,7 +14,7 @@ const MyBreadcrumb: React.FunctionComponent = (): React.ReactElement => {
                 <Breadcrumb style={{margin: '24px'}}>
                     <Breadcrumb.Item>My</Breadcrumb.Item>
                     <Breadcrumb.Item>Breadcrumb</Breadcrumb.Item>
-                    {authenticate.token && <Breadcrumb.Item>Hi - {authenticate.data.firstName}</Breadcrumb.Item>}
+                    {authenticate.accessToken && <Breadcrumb.Item>Hi - {authenticate.user.email}</Breadcrumb.Item>}
                 </Breadcrumb>
             </Col>
         </Row>

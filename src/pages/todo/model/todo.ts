@@ -1,15 +1,3 @@
-export interface IGetTodoFilter {
-    id?: number;
-    limit?: number;
-}
-
-export interface ITodo {
-    id: number
-    userId: number
-    title: string
-    completed: boolean
-}
-
 export interface IAddress {
     street: string
     suite: string

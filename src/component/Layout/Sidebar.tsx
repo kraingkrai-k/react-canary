@@ -25,7 +25,7 @@ const NavLink: React.FunctionComponent = (): React.ReactElement => {
             window.sessionStorage.removeItem(ACCESS_TOKEN)
             dispatch(setUnAuthorization())
             push("/")
-            SuccessMsg(`Bye - ${authenticate.data.firstName}`)
+            SuccessMsg(`Bye - ${authenticate.user.email}`)
         } catch (err) {
             ErrorMsg()
             console.warn('ERR - ', err)
@@ -64,7 +64,7 @@ const NavLink: React.FunctionComponent = (): React.ReactElement => {
             </SubMenu>
 
             {
-                authenticate.token &&
+                authenticate.accessToken &&
                 <Menu.Item key="logout" icon={<LogoutOutlined/>} onClick={onConfirmLogOut}>
                     <Typography.Text>
                         Logout

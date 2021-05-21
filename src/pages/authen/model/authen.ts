@@ -1,12 +1,12 @@
 export interface AuthenticateInput {
-    username: string
+    email: string
     password: string
 }
 
 export interface AuthenticateOutput {
-    token: string
-    data: {
-        firstName: string,
-        lastName: string,
+    accessToken: string
+    user: {
+        id: number
+        email: string,
     }
 }

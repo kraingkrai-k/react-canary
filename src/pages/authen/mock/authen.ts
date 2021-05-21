@@ -1,14 +1,14 @@
 import {AuthenticateInput, AuthenticateOutput} from "../model/authen";
 
 export const AuthenticateInputMock: AuthenticateInput = {
-    username: "KK",
-    password: "password"
+    email: "kraingkrai",
+    password: "kkk1234"
 }
 
 export const AuthenticateOutputMock: AuthenticateOutput = {
-    token: "KKK",
-    data: {
-        firstName: "Kraingkrai",
-        lastName: "Keawobchoei"
+    accessToken: "KKK",
+    user: {
+        id: 0,
+        email: "Kraingkrai",
     }
 }
