@@ -1,4 +1,4 @@
-name: Build & deploy gihub pages
+name: demo
 
 on:
   push:
