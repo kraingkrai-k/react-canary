@@ -1,12 +1,9 @@
-name: Build & deploy
+name: Build & deploy gihub pages
 
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - demo-gh
 
 env:
   REACT_APP_BASE_URL_REST: ${{ secrets.REACT_APP_BASE_URL_REST }}
@@ -61,8 +58,8 @@ jobs:
           name: production-files
           path: ./build
 
-#      - name: Deploy to gh-pages
-#        uses: peaceiris/actions-gh-pages@v3
-#        with:
-#          github_token: ${{ secrets.GITHUB_TOKEN }}
-#          publish_dir: ./build
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build
