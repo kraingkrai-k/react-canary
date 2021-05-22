@@ -22,7 +22,7 @@ const Services = (axiosInstance: AxiosInstance): ITodoService => {
             //     }
             //     return data
             // } catch (err) {
-            //     return err
+            // throw new Error(err)
             // }
         }
     }

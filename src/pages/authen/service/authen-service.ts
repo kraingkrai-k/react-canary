@@ -22,7 +22,7 @@ const AuthService = (axiosInstance: AxiosInstance): IServiceAuth => {
                 }
                 return data
             } catch (err) {
-                return err
+                throw new Error(err)
             }
         },
     }
