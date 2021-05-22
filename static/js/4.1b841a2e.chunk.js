@@ -1,0 +1,2 @@
+(this["webpackJsonpreact-canary"]=this["webpackJsonpreact-canary"]||[]).push([[4],{318:function(a,c,t){"use strict";t.r(c);t(0);var e=t(289),n=t(290),r=t(162),s=t(6);c.default=function(){return Object(s.jsx)(e.a,{children:Object(s.jsx)(n.a,{span:24,children:Object(s.jsx)(r.a,{})})})}}}]);
+//# sourceMappingURL=4.1b841a2e.chunk.js.map
