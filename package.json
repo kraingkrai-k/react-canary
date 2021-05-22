@@ -6,7 +6,7 @@
     "name": "Kraingkrai-K",
     "github": "https://github.com/kraingkrai-k"
   },
-  "homepage": "https://kraingkrai-k.github.io/react-canary/",
+  "homepage": ".",
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@reduxjs/toolkit": "^1.5.0",
@@ -28,7 +28,9 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "image:build": "docker build . -t kraingkrai/react-canary:react-canary",
+    "image:run": "docker run -p 3100:80 --name react-canary -it kraingkrai/react-canary:react-canary"
   },
   "eslintConfig": {
     "extends": [
