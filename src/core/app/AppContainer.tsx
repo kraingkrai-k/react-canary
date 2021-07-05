@@ -1,16 +1,23 @@
 import React, {Suspense, useEffect, useState} from "react";
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, Switch} from "react-router-dom";
 import {useDispatch} from 'react-redux'
+import {Layout} from "antd";
 
 import {setAuthenticate} from "store/app";
 import {AuthenticateOutputMock} from "pages/authen/mock/authen";
 
 import {ACCESS_TOKEN} from "../utils/storage";
 
-import LayoutComponent from "../../component/Layout";
 import ErrorBoundary from "../../component/Exceptions/ErrorBoundary";
 import Loading from "../../component/common/LoadingComp";
 import {ErrorMsg} from "../../component/common/ToastMessage";
+import Sidebar from "../../component/Layout/Sidebar";
+import Header from "../../component/Layout/Header";
+import FooterComponent from "../../component/Layout/Footer";
+
+import {RenderAppRoute} from "./route";
+
+const {Sider, Content, Footer} = Layout;
 
 const AppContainer: React.FunctionComponent = (): React.ReactElement => {
     const dispatch = useDispatch()
@@ -40,9 +47,24 @@ const AppContainer: React.FunctionComponent = (): React.ReactElement => {
     }
     return (
         <ErrorBoundary>
-            <BrowserRouter basename={process.env.PUBLIC_URL}>
+            <BrowserRouter
+                // basename={process.env.PUBLIC_URL}
+            >
                 <Suspense fallback={<Loading/>}>
-                    <LayoutComponent/>
+                    <Layout style={{minHeight: "100vh"}}>
+                        <Sider collapsible>
+                            <Sidebar/>
+                        </Sider>
+                        <Content>
+                            <Header/>
+                            <div style={{padding: "24px", minHeight: '85vh'}}>
+                                <Switch>
+                                    {RenderAppRoute}
+                                </Switch>
+                            </div>
+                            <Footer><FooterComponent/></Footer>
+                        </Content>
+                    </Layout>
                 </Suspense>
             </BrowserRouter>
         </ErrorBoundary>

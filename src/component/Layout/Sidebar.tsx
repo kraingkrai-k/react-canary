@@ -2,18 +2,17 @@ import React from "react";
 import {useHistory} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {Menu, Image, Typography, Modal} from 'antd';
-import {MoreOutlined, LogoutOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
+import {LogoutOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
 
 import {RootStoreType, setUnAuthorization} from "store/app";
-import {RenderMenu, RenderSubMenuMore} from "core/app/route";
 import {ACCESS_TOKEN} from "core/utils/storage";
 
 import {ErrorMsg, SuccessMsg} from "../common/ToastMessage";
+import SideBarMenu from "./component/sidebarMenu";
 
-const {SubMenu} = Menu;
 const {confirm} = Modal
 
-const NavLink: React.FunctionComponent = (): React.ReactElement => {
+const SideBar: React.FunctionComponent = (): React.ReactElement => {
     const dispatch = useDispatch();
     const {authenticate} = useSelector(
         (state: RootStoreType) => state.app
@@ -57,12 +56,7 @@ const NavLink: React.FunctionComponent = (): React.ReactElement => {
                     src="https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg"
                 />
             </Menu.Item>
-            {RenderMenu}
-
-            <SubMenu key="more" icon={<MoreOutlined/>} title="More">
-                {RenderSubMenuMore}
-            </SubMenu>
-
+            {SideBarMenu}
             {
                 authenticate.accessToken &&
                 <Menu.Item key="logout" icon={<LogoutOutlined/>} onClick={onConfirmLogOut}>
@@ -71,9 +65,8 @@ const NavLink: React.FunctionComponent = (): React.ReactElement => {
                     </Typography.Text>
                 </Menu.Item>
             }
-
         </Menu>
     );
 };
 
-export default NavLink;
+export default SideBar;

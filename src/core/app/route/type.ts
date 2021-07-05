@@ -1,14 +1,11 @@
-export enum ITypeNavLink {
-    NavLink = "navLink",
-    SubMenuMore = "subMenuMore",
-    Hide = "hide"
-}
+import React from "react";
 
 export interface IPropRouteComponent {
     label: string
     path: string
-    type: ITypeNavLink
     icon: React.ReactElement
+    showInMenu: boolean
+    subMenu?: IPropRouteComponent[]
     role: string[]
     Component: React.ReactElement
 }
@@ -20,4 +17,8 @@ export interface IPropPrivateRoute {
 export enum IRole {
     Developer = 'developer',
     Tester = 'tester'
+}
+
+export interface IPropSubRoute {
+    baseUrl: string
 }

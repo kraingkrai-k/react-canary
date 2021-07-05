@@ -4,7 +4,6 @@ import {Row, Col, Typography, Divider} from 'antd';
 import {Counters} from "./component";
 
 const Home: React.FunctionComponent = (): React.ReactElement => {
-
     return (
         <>
             <Row>
@@ -13,7 +12,6 @@ const Home: React.FunctionComponent = (): React.ReactElement => {
                 </Col>
             </Row>
             <Divider/>
-
             <Row>
                 <Col span={24}>
                     <Counters/>
