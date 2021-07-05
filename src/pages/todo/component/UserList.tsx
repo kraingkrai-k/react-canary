@@ -6,7 +6,6 @@ import {ErrorMsg} from "component/common/ToastMessage";
 
 import {IUser} from "../model/todo";
 import TodoService, {ITodoService} from "../service/todo-service";
-import {useRouteMatch, useHistory} from "react-router-dom";
 
 interface InterfaceState {
     loading: boolean,
@@ -14,8 +13,6 @@ interface InterfaceState {
 }
 
 const UserList: React.FunctionComponent = (): React.ReactElement => {
-    const {url} = useRouteMatch()
-    const {push} = useHistory()
 
     const {service} = useAxios<ITodoService>((axiosInstance) => TodoService(axiosInstance))
     const [state, setState] = useState<InterfaceState>({loading: true, userList: []})
@@ -44,7 +41,9 @@ const UserList: React.FunctionComponent = (): React.ReactElement => {
                 itemLayout="horizontal"
                 dataSource={state.userList}
                 renderItem={(item: IUser) => (
-                    <List.Item onClick={() => push(`${url}/${item.id}/ct`)}>
+                    <List.Item
+                        // onClick={() => push(`${url}/${item.id}/ct`)}
+                    >
                         <List.Item.Meta
                             avatar={
                                 <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"/>
